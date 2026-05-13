@@ -9,18 +9,16 @@ function LoginPage() {
   const [tab, setTab] = useState("");
   const [panel, setPanel] = useState("signin");
 
-  // Signin inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Signup inputs
   const [name, setName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
   const togglePanel = (panelName) => setPanel(panelName);
 
-  // Signup
+  // SIGNUP
   const handleSignup = async () => {
     try {
       const res = await fetch(`${BASE_URL}/api/signup`, {
@@ -34,9 +32,10 @@ function LoginPage() {
       });
 
       const data = await res.json();
+
       if (!res.ok) throw new Error(data.message || "Signup failed");
 
-      console.log("Signup Successful:", data.message);
+      alert("Signup successful 🎉");
       setTab("home");
     } catch (err) {
       console.error("Signup Error:", err.message);
@@ -44,7 +43,7 @@ function LoginPage() {
     }
   };
 
-  // Signin
+  // SIGNIN
   const handleSignin = async () => {
     try {
       const res = await fetch(`${BASE_URL}/api/signin`, {
@@ -54,9 +53,10 @@ function LoginPage() {
       });
 
       const data = await res.json();
+
       if (!res.ok) throw new Error(data.message || "Signin failed");
 
-      console.log("Signin Successful:", data.message);
+      alert("Login successful 🎉");
       setTab("home");
     } catch (err) {
       console.error("Signin Error:", err.message);
@@ -64,30 +64,30 @@ function LoginPage() {
     }
   };
 
-  // Home screen
-  if (tab === "home")
+  // HOME
+  if (tab === "home") {
     return (
       <>
         <Header />
         <Body email={email || newEmail} />
       </>
     );
+  }
 
   return (
     <div className="body-container">
       <div className={`container ${panel === "signup" ? "right-panel-active" : ""}`}>
-        {/* Sign Up */}
+
+        {/* SIGN UP */}
         <div className="form-container sign-up-container">
           <form>
             <h1>Create Account</h1>
-            <span>Use your email for registration</span>
 
             <input
               type="text"
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
             />
 
             <input
@@ -95,7 +95,6 @@ function LoginPage() {
               placeholder="Email"
               value={newEmail}
               onChange={(e) => setNewEmail(e.target.value)}
-              required
             />
 
             <input
@@ -103,7 +102,6 @@ function LoginPage() {
               placeholder="Password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              required
             />
 
             <button type="button" onClick={handleSignup}>
@@ -112,18 +110,16 @@ function LoginPage() {
           </form>
         </div>
 
-        {/* Sign In */}
+        {/* SIGN IN */}
         <div className="form-container sign-in-container">
           <form>
             <h1>Sign In</h1>
-            <span>Use your account</span>
 
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
 
             <input
@@ -131,12 +127,7 @@ function LoginPage() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
-
-            <button type="button" className="forgot-btn">
-              Forgot your password?
-            </button>
 
             <button type="button" onClick={handleSignin}>
               Sign In
@@ -144,12 +135,13 @@ function LoginPage() {
           </form>
         </div>
 
-        {/* Overlay */}
+        {/* OVERLAY */}
         <div className="overlay-container">
           <div className="overlay">
+
             <div className="overlay-panel overlay-left">
               <h1>Welcome Back!</h1>
-              <p>To keep connected with us please login with your personal info</p>
+              <p>Login with your personal info</p>
               <button className="ghost" onClick={() => togglePanel("signin")}>
                 Sign In
               </button>
@@ -157,13 +149,15 @@ function LoginPage() {
 
             <div className="overlay-panel overlay-right">
               <h1>Hello, Friend!</h1>
-              <p>Enter your personal details and start your journey with us</p>
+              <p>Enter your details and start your journey</p>
               <button className="ghost" onClick={() => togglePanel("signup")}>
                 Sign Up
               </button>
             </div>
+
           </div>
         </div>
+
       </div>
     </div>
   );

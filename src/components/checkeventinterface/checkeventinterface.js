@@ -1,19 +1,20 @@
 import { useEffect, useState, useCallback } from "react";
 import "./checkeventinterface.css";
 
-function CheckEventInterface({ userEmail, goback }) {
+function CheckEventInterface({ userEmail }) {
+  const BASE_URL = "https://eventcell-manager.onrender.com";
+
   const [events, setEvents] = useState([]);
   const [view, setView] = useState("all");
 
-  // Fetch events based on view
   const fetchEvents = useCallback(async () => {
     try {
-      let url = "http://localhost:5000/api/events";
+      let url = `${BASE_URL}/api/events`;
 
       if (view === "created") {
-        url = `http://localhost:5000/api/events/created/${userEmail}`;
+        url = `${BASE_URL}/api/events/created/${userEmail}`;
       } else if (view === "registered") {
-        url = `http://localhost:5000/api/events/registered/${userEmail}`;
+        url = `${BASE_URL}/api/events/registered/${userEmail}`;
       }
 
       const res = await fetch(url);
@@ -34,7 +35,7 @@ function CheckEventInterface({ userEmail, goback }) {
   const handleRegister = async (eventId) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/events/markregistered/${eventId}`,
+        `${BASE_URL}/api/events/markregistered/${eventId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -118,7 +119,7 @@ function CheckEventInterface({ userEmail, goback }) {
                   checked={event.registeredUsers?.includes(userEmail)}
                   onChange={() => handleRegister(event._id)}
                   disabled={event.registeredUsers?.includes(userEmail)}
-                />{" "}
+                />
                 Registered
               </label>
             </div>

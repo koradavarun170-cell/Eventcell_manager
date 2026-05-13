@@ -11,7 +11,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
-app.use(express.json());
+app.use(express.json());  
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", userRoutes);
@@ -30,3 +30,4 @@ mongoose
 app.listen(PORT, () => {
   console.log("server started at port:", PORT);
 });
+console.log("MONGO_URI:", process.env.MONGO_URI);
