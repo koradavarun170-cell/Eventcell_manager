@@ -118,10 +118,13 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <a href="#">Forgot your password?</a>
-            <button type="button" onClick={handleSignin}>
-              Sign In
-            </button>
+            <button type="button" className="forgot-btn">
+          Forgot your password?
+        </button>
+
+        <button type="button" onClick={handleSignin}>
+          Sign In
+        </button>
           </form>
         </div>
 

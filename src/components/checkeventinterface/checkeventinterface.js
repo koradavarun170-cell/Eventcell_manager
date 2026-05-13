@@ -25,13 +25,10 @@ function CheckEventInterface({ userEmail, goback }) {
       console.error(err);
       setEvents([]);
     }
-  };
-
+    };
   useEffect(() => {
     fetchEvents();
-  }, [view, userEmail]);
-
-  // Handle registration for a specific event
+  }, [view, userEmail, fetchEvents]);
   const handleRegister = async (eventId) => {
     try {
       const res = await fetch(
