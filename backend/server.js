@@ -6,14 +6,24 @@ const app = express();
 const userRoutes = require("./routes/userRoutes");
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/api", userRoutes);
-const PORT = 5000;
-const MONGO_URI = "mongodb://koradavarun170_db_user:varun%40123@ac-mp1fncf-shard-00-00.ugwqidw.mongodb.net:27017,ac-mp1fncf-shard-00-01.ugwqidw.mongodb.net:27017,ac-mp1fncf-shard-00-02.ugwqidw.mongodb.net:27017/hotel-booking?ssl=true&replicaSet=atlas-4ffwoa-shard-0&authSource=admin&appName=cluster1";
+
+const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+
 mongoose
-  .connect(MONGO_URI)
+  .connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
