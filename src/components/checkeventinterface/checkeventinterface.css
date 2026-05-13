@@ -1,0 +1,88 @@
+.check-container {
+  padding: 20px;
+  max-width: 1000px; /* limit the container */
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aquamarine;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.head h2 {
+  margin: 0;
+  color: #007bff;
+  font-size: 1.8rem;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.tabs button {
+  padding: 8px 16px;
+  border: none;
+  background: #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tabs button.active {
+  background: #007bff;
+  color: white;
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 300px)); /* max width per card */
+  justify-content: center; /* center cards if there's space */
+  gap: 15px;
+}
+
+.event-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 15px;
+  background: #fff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.event-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.event-card h3 {
+  margin: 8px 0;
+  color: #007bff;
+  font-size: 1.2rem;
+}
+
+.event-card p {
+  margin: 4px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.event-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}

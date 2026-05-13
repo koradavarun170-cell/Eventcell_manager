@@ -1,0 +1,8 @@
+.body-containery{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #f0f2f5; 
+    height: 566px;
+    width: 100%;
+}

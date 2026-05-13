@@ -1,0 +1,110 @@
+body {
+  background: linear-gradient(to right, #f2fcfe, #1c92d2);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container */
+.container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 40px 50px;
+  max-width: 800px;
+  margin: 60px auto;
+  text-align: left; 
+}
+
+h2 {
+  font-weight: 600;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+/* Labels */
+.form-label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  text-align: left;
+  display: block;
+}
+
+/* Input, textarea, and select fields */
+.form-control,
+.form-select {
+  border-radius: 10px;
+  border: 1px solid #cdd9ed;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+/* Organizer and Faculty sections */
+.organizer,
+.faculty {
+  border: 1px solid #e3e8ef;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Poster preview */
+img {
+  border-radius: 10px;
+  object-fit: contain;
+  display: block;
+  margin-top: 10px;
+}
+
+/* Radio button sections */
+.form-check {
+  text-align: left;
+}
+
+/* Success message */
+.alert-success {
+  font-weight: 500;
+  border-radius: 10px;
+  background-color: #d1f2eb;
+  color: #117a65;
+  border: none;
+  text-align: center;
+}
