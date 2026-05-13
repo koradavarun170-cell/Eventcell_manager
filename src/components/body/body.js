@@ -22,8 +22,8 @@ function Body(props) {
         </div>
       )}
       <div>
-        {isactive == "create" && <CreateEventInterface userEmail={email} goback={goback} />}
-        {isactive == "check" && <CheckEventInterface userEmail={email} goback={goback} />}
+       {isactive === "create" && <CreateEventInterface userEmail={email} goback={goback} />}
+        {isactive === "check" && <CheckEventInterface userEmail={email} goback={goback} />}
       </div>
     </>
   );
