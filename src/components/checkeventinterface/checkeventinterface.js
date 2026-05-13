@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import "./checkeventinterface.css";
 
 function CheckEventInterface({ userEmail, goback }) {
   const [events, setEvents] = useState([]);
-  const [view, setView] = useState("all"); // "all", "created", "registered"
+  const [view, setView] = useState("all");
 
   // Fetch events based on view
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       let url = "http://localhost:5000/api/events";
 
@@ -25,25 +25,28 @@ function CheckEventInterface({ userEmail, goback }) {
       console.error(err);
       setEvents([]);
     }
-    };
+  }, [view, userEmail]);
+
   useEffect(() => {
     fetchEvents();
-  }, [view, userEmail, fetchEvents]);
+  }, [fetchEvents]);
+
   const handleRegister = async (eventId) => {
     try {
       const res = await fetch(
         `http://localhost:5000/api/events/markregistered/${eventId}`,
         {
-          method: "PUT", // <- change this
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: userEmail }),
         }
       );
+
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Registration failed");
 
       alert("Registered successfully!");
-      fetchEvents(); // refresh events
+      fetchEvents();
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -54,6 +57,7 @@ function CheckEventInterface({ userEmail, goback }) {
     <div className="check-container">
       <div className="head">
         <h2>College Events</h2>
+
         <div className="tabs">
           <button
             onClick={() => setView("all")}
@@ -61,12 +65,14 @@ function CheckEventInterface({ userEmail, goback }) {
           >
             All Events
           </button>
+
           <button
             onClick={() => setView("created")}
             className={view === "created" ? "active" : ""}
           >
             My Events
           </button>
+
           <button
             onClick={() => setView("registered")}
             className={view === "registered" ? "active" : ""}
@@ -89,19 +95,23 @@ function CheckEventInterface({ userEmail, goback }) {
                   className="event-poster"
                 />
               )}
+
               <h3>{event.title}</h3>
+
               <p>
                 <b>Start:</b> {new Date(event.startDate).toLocaleString()}
               </p>
+
               <p>
                 <b>End:</b> {new Date(event.endDate).toLocaleString()}
               </p>
+
               <p>
                 <b>Location:</b> {event.location}
               </p>
+
               <p>{event.description}</p>
 
-              {/* Registration Checkbox */}
               <label>
                 <input
                   type="checkbox"
