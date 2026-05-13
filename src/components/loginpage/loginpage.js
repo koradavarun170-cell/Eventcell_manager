@@ -4,7 +4,9 @@ import { useState } from "react";
 import "./loginpage.css";
 
 function LoginPage() {
-  const [tab, setTab] = useState(""); 
+  const BASE_URL = "https://eventcell-manager.onrender.com";
+
+  const [tab, setTab] = useState("");
   const [panel, setPanel] = useState("signin");
 
   // Signin inputs
@@ -16,11 +18,12 @@ function LoginPage() {
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  // Toggle panels
   const togglePanel = (panelName) => setPanel(panelName);
+
+  // Signup
   const handleSignup = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/signup", {
+      const res = await fetch(`${BASE_URL}/api/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -41,10 +44,10 @@ function LoginPage() {
     }
   };
 
-  // Handle signin
+  // Signin
   const handleSignin = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/signin", {
+      const res = await fetch(`${BASE_URL}/api/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -61,8 +64,14 @@ function LoginPage() {
     }
   };
 
-  // Render main page if logged in
-  if (tab === "home") return <><Header /><Body email={email || newEmail}/></>;
+  // Home screen
+  if (tab === "home")
+    return (
+      <>
+        <Header />
+        <Body email={email || newEmail} />
+      </>
+    );
 
   return (
     <div className="body-container">
@@ -72,6 +81,7 @@ function LoginPage() {
           <form>
             <h1>Create Account</h1>
             <span>Use your email for registration</span>
+
             <input
               type="text"
               placeholder="Name"
@@ -79,6 +89,7 @@ function LoginPage() {
               onChange={(e) => setName(e.target.value)}
               required
             />
+
             <input
               type="email"
               placeholder="Email"
@@ -86,6 +97,7 @@ function LoginPage() {
               onChange={(e) => setNewEmail(e.target.value)}
               required
             />
+
             <input
               type="password"
               placeholder="Password"
@@ -93,6 +105,7 @@ function LoginPage() {
               onChange={(e) => setNewPassword(e.target.value)}
               required
             />
+
             <button type="button" onClick={handleSignup}>
               Sign Up
             </button>
@@ -104,6 +117,7 @@ function LoginPage() {
           <form>
             <h1>Sign In</h1>
             <span>Use your account</span>
+
             <input
               type="email"
               placeholder="Email"
@@ -111,6 +125,7 @@ function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+
             <input
               type="password"
               placeholder="Password"
@@ -118,13 +133,14 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-              <button type="button" className="forgot-btn">
-          Forgot your password?
-        </button>
 
-        <button type="button" onClick={handleSignin}>
-          Sign In
-        </button>
+            <button type="button" className="forgot-btn">
+              Forgot your password?
+            </button>
+
+            <button type="button" onClick={handleSignin}>
+              Sign In
+            </button>
           </form>
         </div>
 
@@ -138,6 +154,7 @@ function LoginPage() {
                 Sign In
               </button>
             </div>
+
             <div className="overlay-panel overlay-right">
               <h1>Hello, Friend!</h1>
               <p>Enter your personal details and start your journey with us</p>
