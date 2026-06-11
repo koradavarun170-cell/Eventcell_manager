@@ -30,5 +30,5 @@ mongoose
   .catch((err) => console.log("MongoDB Connection Error:", err));
   
 app.listen(PORT, "0.0.0.0", () => {
-  console.log("server started at port:", PORT);
+  console.log("Server started at port:", PORT);
 });

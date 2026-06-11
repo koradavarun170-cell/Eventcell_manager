@@ -3,7 +3,10 @@ import { useState } from "react";
 import "./loginpage.css";
 
 function LoginPage() {
-  const BASE_URL = "https://eventcell-manager.onrender.com:5000";
+  // FIX: Dynamic URL switching prevents production port timeout issues
+  const BASE_URL = window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://eventcell-manager.onrender.com";
 
   const [tab, setTab] = useState("");
   const [panel, setPanel] = useState("signin");
@@ -67,46 +70,41 @@ function LoginPage() {
 
   return (
     <div className="page-wrapper">
-{/* LOGO */}
-    <div className="main-logo">
-      <h1>
-        EVENT <span>MANAGER</span>
-      </h1>
-    </div>
+      {/* LOGO */}
+      <div className="main-logo">
+        <h1>
+          EVENT <span>MANAGER</span>
+        </h1>
+      </div>
 
       <div className="center-wrapper">
-
         {/* LOGIN CARD */}
         <div className="body-container">
-
           <div className={`container ${panel === "signup" ? "right-panel-active" : ""}`}>
-
+            
             {/* SIGN UP */}
             <div className="form-container sign-up-container">
               <form>
-               <h1>Create account</h1>
-                 <p>Start organizing and managing events in minutes</p>
+                <h1>Create account</h1>
+                <p>Start organizing and managing events in minutes</p>
                 <input
                   type="text"
                   placeholder="Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-
                 <input
                   type="email"
                   placeholder="Email"
                   value={newEmail}
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
-
                 <input
                   type="password"
                   placeholder="Password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
-
                 <button type="button" onClick={handleSignup}>
                   Sign Up
                 </button>
@@ -116,23 +114,20 @@ function LoginPage() {
             {/* SIGN IN */}
             <div className="form-container sign-in-container">
               <form>
-               
-             <h1>Welcome back</h1>
-               <p>Continue where you left off</p>
+                <h1>Welcome back</h1>
+                <p>Continue where you left off</p>
                 <input
                   type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-
                 <input
                   type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-
                 <button type="button" onClick={handleSignin}>
                   Get Started
                 </button>
@@ -142,21 +137,20 @@ function LoginPage() {
             {/* OVERLAY */}
             <div className="overlay-container">
               <div className="overlay">
-
                 <div className="overlay-panel overlay-left">
                   <h1>Sign in</h1>
-<p>Access your dashboard and manage events</p><button className="ghost" onClick={() => togglePanel("signin")}>
+                  <p>Access your dashboard and manage events</p>
+                  <button className="ghost" onClick={() => togglePanel("signin")}>
                     Sign In
                   </button>
                 </div>
-
                 <div className="overlay-panel overlay-right">
-                 <h1>Get started</h1>
-<p>Create your account and begin managing events</p><button className="ghost" onClick={() => togglePanel("signup")}>
+                  <h1>Get started</h1>
+                  <p>Create your account and begin managing events</p>
+                  <button className="ghost" onClick={() => togglePanel("signup")}>
                     Sign Up
                   </button>
                 </div>
-
               </div>
             </div>
 
