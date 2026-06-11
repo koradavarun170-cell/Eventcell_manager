@@ -3,7 +3,7 @@ import "./checkeventinterface.css";
 
 function CheckEventInterface({ userEmail, goback }) {
 
-  const BASE_URL = "https://eventcell-manager.onrender.com";
+  const BASE_URL = "http://localhost:5000";
 
   const [events, setEvents] = useState([]);
   const [view, setView] = useState("all");
@@ -90,56 +90,56 @@ function CheckEventInterface({ userEmail, goback }) {
     <div className="check-container">
 
       {/* TOP BAR */}
-<div className="top-bar">
+      <div className="top-bar">
 
-  {/* LEFT LOGO */}
+        {/* LEFT LOGO */}
 
-  <div className="nav-logo">
+        <div className="nav-logo">
 
-    <h1>
-      EVENT <span>MANAGER</span>
-    </h1>
+          <h1>
+            EVENT <span>MANAGER</span>
+          </h1>
 
-  </div>
+        </div>
 
-  {/* RIGHT NAVIGATION */}
+        {/* RIGHT NAVIGATION */}
 
-  <div className="nav-links">
+        <div className="nav-links">
 
-    <button
-      onClick={() => setView("all")}
-    >
-      ALL EVENTS
-    </button>
+          <button
+            onClick={() => setView("all")}
+          >
+            ALL EVENTS
+          </button>
 
-    <button
-      onClick={() => setView("created")}
-    >
-      MY EVENTS
-    </button>
+          <button
+            onClick={() => setView("created")}
+          >
+            MY EVENTS
+          </button>
 
-    <button
-      onClick={() => setView("registered")}
-    >
-      REGISTERED
-    </button>
+          <button
+            onClick={() => setView("registered")}
+          >
+            REGISTERED
+          </button>
 
-    <button onClick={goback}>
-      DASHBOARD
-    </button>
+          <button onClick={goback}>
+            DASHBOARD
+          </button>
 
-    <button
-      onClick={() =>
-        window.location.reload()
-      }
-    >
-      LOGOUT
-    </button>
+          <button
+            onClick={() =>
+              window.location.reload()
+            }
+          >
+            LOGOUT
+          </button>
 
-  </div>
+        </div>
 
-</div>
-     
+      </div>
+      
 
       {/* EVENT LIST */}
 
@@ -154,7 +154,7 @@ function CheckEventInterface({ userEmail, goback }) {
           events.map((event, index) => (
 
             <div
-              key={index}
+              key={event._id || index}
               className="event-card"
 
               onClick={(e) => {
@@ -162,9 +162,9 @@ function CheckEventInterface({ userEmail, goback }) {
                 e.stopPropagation();
 
                 setOpenCard(
-                  openCard === index
+                  openCard === event._id
                     ? null
-                    : index
+                    : event._id
                 );
 
               }}
@@ -195,9 +195,9 @@ function CheckEventInterface({ userEmail, goback }) {
 
               {/* OPEN ONLY CLICKED CARD */}
 
-              {openCard === index && (
+              {openCard === event._id && (
 
-                <div className="extra-info">
+                <div className="extra-info" onClick={(e) => e.stopPropagation()}>
 
                   <p>
                     <b>Description:</b> {event.description}

@@ -1,6 +1,7 @@
 // createeventinterface.js
 
 import React, { useState, useEffect } from "react";
+import axios from "axios"; 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./createeventinterface.css";
 
@@ -65,7 +66,7 @@ export default function CreateEventInterface({ userEmail, goback }) {
   };
 
   /* =========================
-     INPUT HANDLER
+      INPUT HANDLER
   ========================= */
   const handleInput = (e) => {
 
@@ -76,14 +77,14 @@ export default function CreateEventInterface({ userEmail, goback }) {
   };
 
   /* =========================
-     RESET SUBCATEGORY
+      RESET SUBCATEGORY
   ========================= */
   useEffect(() => {
     setSubCategory("");
   }, [category]);
 
   /* =========================
-     POSTER HANDLER
+      POSTER HANDLER
   ========================= */
   const handlePosterChange = (e) => {
 
@@ -104,7 +105,7 @@ export default function CreateEventInterface({ userEmail, goback }) {
   };
 
   /* =========================
-     ORGANIZERS
+      ORGANIZERS
   ========================= */
   const handleAddOrganizer = () => {
 
@@ -137,7 +138,7 @@ export default function CreateEventInterface({ userEmail, goback }) {
   };
 
   /* =========================
-     FACULTIES
+      FACULTIES
   ========================= */
   const handleAddFaculty = () => {
 
@@ -168,34 +169,46 @@ export default function CreateEventInterface({ userEmail, goback }) {
     setFaculties(updated);
   };
 
-  /* =========================
-     SUBMIT
-  ========================= */
-  const handleSubmit = (e) => {
+ /* =========================
+    SUBMIT
+========================= */
+const handleSubmit = async (e) => {
 
-    e.preventDefault();
+  e.preventDefault();
 
-    console.log({
-      ...formData,
-      category,
-      subCategory,
-      organizers,
-      faculties,
-      posterBase64,
-      createdBy: userEmail,
-    });
+  // Filters out completely empty fields so your DB doesn't get flooded with empty rows
+  const cleanOrganizers = organizers.filter(org => org.name.trim() !== "");
+  const cleanFaculties = faculties.filter(fac => fac.name.trim() !== "");
+const eventPayload = {
+  ...formData,
+  category,
+  subCategory,
+  organizers: cleanOrganizers,
+  faculties: cleanFaculties,
+  
+  poster: posterBase64, 
+    email: userEmail,
+  participationType: formData.participationType, 
+  type: "Offline" // Or bind this to an actual Online/Offline UI state field
+};
 
-    setMessage(true);
+  try {
+    // Fire it right over to your port 5000 server backend with the /api prefix
+    const response = await axios.post("http://localhost:5000/api/addevent", eventPayload);
 
-    setTimeout(() => {
+    if (response.status === 200 || response.status === 201) {
+      setMessage(true);
 
-      setMessage(false);
-
-      goback();
-
-    }, 1500);
-  };
-
+      setTimeout(() => {
+        setMessage(false);
+        goback();
+      }, 1500);
+    }
+  } catch (error) {
+    console.error("Axios Connection Error:", error);
+    alert(error.response?.data?.message || "Cannot reach your backend server. Ensure node server.js is running!");
+  }
+};
   return (
 
     <div className="page">
@@ -337,7 +350,7 @@ export default function CreateEventInterface({ userEmail, goback }) {
 
                 {subCategories[category]?.map((s) => (
 
-                  <option key={s}>
+                  <option key={s} value={s}>
                     {s}
                   </option>
 
@@ -380,8 +393,8 @@ export default function CreateEventInterface({ userEmail, goback }) {
                   Select
                 </option>
 
-                <option>Solo</option>
-                <option>Team</option>
+                <option value="Solo">Solo</option>
+                <option value="Team">Team</option>
 
               </select>
 

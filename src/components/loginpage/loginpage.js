@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./loginpage.css";
 
 function LoginPage() {
-  const BASE_URL = "https://eventcell-manager.onrender.com";
+  const BASE_URL = "http://localhost:5000";
 
   const [tab, setTab] = useState("");
   const [panel, setPanel] = useState("signin");
