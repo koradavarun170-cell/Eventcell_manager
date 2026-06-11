@@ -1,12 +1,18 @@
-import './header.css'
+import "./header.css";
+
 function Header() {
-    return ( 
+
+    return (
+
         <div className="header-container">
-            <div className="header">
-                <h1>Event Manager</h1>
-            </div>
+
+            <h1>
+                Event <span>Manager</span>
+            </h1>
+
         </div>
-     );
+
+    );
 }
 
 export default Header;

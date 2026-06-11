@@ -1,5 +1,4 @@
 import Body from "../body/body";
-import Header from "../Header/header";
 import { useState } from "react";
 import "./loginpage.css";
 
@@ -38,7 +37,6 @@ function LoginPage() {
       alert("Signup successful 🎉");
       setTab("home");
     } catch (err) {
-      console.error("Signup Error:", err.message);
       alert(err.message);
     }
   };
@@ -59,105 +57,111 @@ function LoginPage() {
       alert("Login successful 🎉");
       setTab("home");
     } catch (err) {
-      console.error("Signin Error:", err.message);
       alert(err.message);
     }
   };
 
-  // HOME
   if (tab === "home") {
-    return (
-      <>
-        <Header />
-        <Body email={email || newEmail} />
-      </>
-    );
+    return <Body email={email || newEmail} />;
   }
 
   return (
-    <div className="body-container">
-      <div className={`container ${panel === "signup" ? "right-panel-active" : ""}`}>
+    <div className="page-wrapper">
+{/* LOGO */}
+    <div className="main-logo">
+      <h1>
+        EVENT <span>MANAGER</span>
+      </h1>
+    </div>
 
-        {/* SIGN UP */}
-        <div className="form-container sign-up-container">
-          <form>
-            <h1>Create Account</h1>
+      <div className="center-wrapper">
 
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+        {/* LOGIN CARD */}
+        <div className="body-container">
 
-            <input
-              type="email"
-              placeholder="Email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
+          <div className={`container ${panel === "signup" ? "right-panel-active" : ""}`}>
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
+            {/* SIGN UP */}
+            <div className="form-container sign-up-container">
+              <form>
+               <h1>Create account</h1>
+                 <p>Start organizing and managing events in minutes</p>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
 
-            <button type="button" onClick={handleSignup}>
-              Sign Up
-            </button>
-          </form>
-        </div>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                />
 
-        {/* SIGN IN */}
-        <div className="form-container sign-in-container">
-          <form>
-            <h1>Sign In</h1>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
 
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <button type="button" onClick={handleSignin}>
-              Sign In
-            </button>
-          </form>
-        </div>
-
-        {/* OVERLAY */}
-        <div className="overlay-container">
-          <div className="overlay">
-
-            <div className="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <p>Login with your personal info</p>
-              <button className="ghost" onClick={() => togglePanel("signin")}>
-                Sign In
-              </button>
+                <button type="button" onClick={handleSignup}>
+                  Sign Up
+                </button>
+              </form>
             </div>
 
-            <div className="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
-              <p>Enter your details and start your journey</p>
-              <button className="ghost" onClick={() => togglePanel("signup")}>
-                Sign Up
-              </button>
+            {/* SIGN IN */}
+            <div className="form-container sign-in-container">
+              <form>
+               
+             <h1>Welcome back</h1>
+               <p>Continue where you left off</p>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <button type="button" onClick={handleSignin}>
+                  Get Started
+                </button>
+              </form>
+            </div>
+
+            {/* OVERLAY */}
+            <div className="overlay-container">
+              <div className="overlay">
+
+                <div className="overlay-panel overlay-left">
+                  <h1>Sign in</h1>
+<p>Access your dashboard and manage events</p><button className="ghost" onClick={() => togglePanel("signin")}>
+                    Sign In
+                  </button>
+                </div>
+
+                <div className="overlay-panel overlay-right">
+                 <h1>Get started</h1>
+<p>Create your account and begin managing events</p><button className="ghost" onClick={() => togglePanel("signup")}>
+                    Sign Up
+                  </button>
+                </div>
+
+              </div>
             </div>
 
           </div>
         </div>
-
       </div>
     </div>
   );

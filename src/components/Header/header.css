@@ -1,9 +1,151 @@
-.header-container{
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&display=swap');
+
+.header-container {
+
+    position: fixed;
+
+    top: 18px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 80px);
+
+    height: 82px;
+
+    border-radius: 28px;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
-    width: 100%;
-    background-color: rgb(161, 143, 224);
-    padding: 15px;
-    color:rgb(21, 38, 133)
+
+    overflow: hidden;
+
+    background: rgba(15,23,42,0.45);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.35),
+        inset 0 1px 1px rgba(255,255,255,0.06);
+
+    z-index: 1000;
+}
+
+/* CURVED GLOW SHAPE */
+
+.header-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+
+    height: 280px;
+
+    background: radial-gradient(
+        circle,
+        rgba(96,165,250,0.25),
+        transparent 70%
+    );
+
+    top: -150px;
+
+    left: -80px;
+
+    border-radius: 50%;
+}
+
+/* SECOND CURVE */
+
+.header-container::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+
+    height: 240px;
+
+    background: radial-gradient(
+        circle,
+        rgba(168,85,247,0.22),
+        transparent 70%
+    );
+
+    bottom: -150px;
+
+    right: -80px;
+
+    border-radius: 50%;
+}
+
+/* TITLE */
+
+.header-container h1 {
+
+    position: relative;
+
+    margin: 0;
+
+    color: white;
+
+    font-size: 36px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    font-family: "Orbitron", sans-serif;
+
+    text-transform: uppercase;
+
+    z-index: 2;
+
+    text-shadow:
+        0 0 12px rgba(255,255,255,0.18),
+        0 0 25px rgba(96,165,250,0.25);
+}
+
+/* CURVED UNDERLINE */
+
+.header-container h1::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    bottom: -10px;
+
+    width: 120px;
+
+    height: 4px;
+
+    border-radius: 50px;
+
+    background: linear-gradient(
+        to right,
+        #60a5fa,
+        #a855f7
+    );
+}
+
+/* HIGHLIGHT */
+
+.header-container span {
+
+    color: #93c5fd;
 }

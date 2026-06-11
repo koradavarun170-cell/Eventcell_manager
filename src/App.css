@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+html, body {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}#root {
+  min-height: 100vh;
+}

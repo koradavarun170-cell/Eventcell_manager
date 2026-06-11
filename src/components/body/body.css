@@ -1,8 +1,331 @@
-.body-containery{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #f0f2f5; 
-    height: 566px;
+body {
+
+    margin: 0;
+
+    font-family: "Poppins", sans-serif;
+
+    overflow: hidden;
+}
+
+/* MAIN PAGE */
+
+.body-page {
+
     width: 100%;
+
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 25px 40px;
+
+    box-sizing: border-box;
+}
+
+/* TOP HEADER */
+
+.top-header {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+/* LOGO */
+
+.logo {
+
+    color: white;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+/* SMALL TEXT */
+
+.logo span {
+
+    color: #cbd5e1;
+
+    font-weight: 500;
+
+    font-size: 18px;
+}
+
+/* NAV BUTTON */
+
+.header-btn {
+
+    padding: 12px 24px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    backdrop-filter: blur(10px);
+
+    transition: 0.3s ease;
+}
+
+.header-btn:hover {
+
+    background: rgba(255,255,255,0.22);
+}
+
+/* CARD SECTION */
+
+.body-containery {
+
+    flex: 1;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 40px;
+}
+
+/* PANELS */
+
+.left-panel,
+.right-panel {
+
+    flex: 1;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+/* MAIN CARD */
+
+.action-card {
+
+    width: 420px;
+
+    height: 500px;
+
+    background: rgba(10,15,25,0.72);
+
+    border-radius: 30px;
+
+    padding: 28px;
+
+    box-sizing: border-box;
+
+    backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+
+    transition: 0.35s ease;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.action-card:hover {
+
+    transform: translateY(-8px);
+}
+
+/* WHITE INNER BOX */
+
+.card-image-box {
+
+    width: 100%;
+
+    height: 220px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    margin-bottom: 28px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+/* OPTIONAL IMAGE */
+
+.card-image-box img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* TITLE */
+
+.action-card h2 {
+
+    color: white;
+
+    font-size: 42px;
+
+    margin: 0 0 15px 0;
+
+    line-height: 1.1;
+}
+
+/* DESCRIPTION */
+
+.action-card p {
+
+    color: rgba(255,255,255,0.78);
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    margin-bottom: 28px;
+}
+
+/* BUTTON */
+
+.action-card button {
+
+    margin-top: auto;
+
+    width: fit-content;
+
+    padding: 14px 30px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    background: white;
+
+    color: #111827;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.action-card button:hover {
+
+    transform: scale(1.05);
+
+    background: #f3f4f6;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 950px){
+
+    body {
+
+        overflow-y: auto;
+    }
+
+    .body-page {
+
+        height: auto;
+    }
+
+    .body-containery {
+
+        flex-direction: column;
+
+        padding-bottom: 40px;
+    }
+
+    .action-card {
+
+        width: 92%;
+    }
+}
+/* ================= NAVBAR ================= */
+
+.body-navbar{
+
+    width:92%;
+
+    margin:auto;
+
+    margin-top:25px;
+
+    margin-bottom:40px;
+
+    padding:22px 38px;
+
+    border-radius:28px;
+
+    background:rgba(15,23,42,0.72);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,0.4);
+
+    display:flex;
+
+    align-items:center;
+}
+
+/* ================= LOGO ================= */
+
+.body-logo h1{
+
+    margin:0;
+
+    color:white;
+
+    font-size:36px;
+
+    font-weight:800;
+
+    letter-spacing:4px;
+}
+
+.body-logo span{
+
+    color:#93c5fd;
+
+    font-size:18px;
+
+    margin-left:6px;
+
+    letter-spacing:2px;
 }
