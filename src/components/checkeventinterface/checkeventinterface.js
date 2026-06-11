@@ -3,7 +3,7 @@ import "./checkeventinterface.css";
 
 function CheckEventInterface({ userEmail, goback }) {
 
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://eventcell-manager.onrender.com:5000";
 
   const [events, setEvents] = useState([]);
   const [view, setView] = useState("all");

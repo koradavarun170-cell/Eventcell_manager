@@ -194,7 +194,7 @@ const eventPayload = {
 
   try {
     // Fire it right over to your port 5000 server backend with the /api prefix
-    const response = await axios.post("http://localhost:5000/api/addevent", eventPayload);
+    const response = await axios.post("https://eventcell-manager.onrender.com:5000/api/addevent", eventPayload);
 
     if (response.status === 200 || response.status === 201) {
       setMessage(true);
