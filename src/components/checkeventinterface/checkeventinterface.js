@@ -13,16 +13,14 @@ function CheckEventInterface({ userEmail, goback }) {
   // ONLY ONE CARD OPEN
   const [openCard, setOpenCard] = useState(null);
 
+  // FIX: Added BASE_URL to the dependency array to pass Vercel compilation
   const fetchEvents = useCallback(async () => {
-
     try {
-
       let url = `${BASE_URL}/api/events`;
 
       if (view === "created") {
         url = `${BASE_URL}/api/events/created/${userEmail}`;
       }
-
       else if (view === "registered") {
         url = `${BASE_URL}/api/events/registered/${userEmail}`;
       }
@@ -34,35 +32,27 @@ function CheckEventInterface({ userEmail, goback }) {
       }
 
       const data = await res.json();
-
       setEvents(data);
 
     } catch (err) {
-
       console.error(err);
       setEvents([]);
-
     }
-
-  }, [view, userEmail]);
+  }, [view, userEmail, BASE_URL]); 
 
   useEffect(() => {
     fetchEvents();
   }, [fetchEvents]);
 
   const handleRegister = async (eventId) => {
-
     try {
-
       const res = await fetch(
         `${BASE_URL}/api/events/markregistered/${eventId}`,
         {
           method: "PUT",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             email: userEmail,
           }),
@@ -76,53 +66,36 @@ function CheckEventInterface({ userEmail, goback }) {
       }
 
       alert("Registered Successfully!");
-
       fetchEvents();
 
     } catch (err) {
-
       console.error(err);
       alert(err.message);
-
     }
   };
 
   return (
-
     <div className="check-container">
-
       {/* TOP BAR */}
       <div className="top-bar">
-
         {/* LEFT LOGO */}
-
         <div className="nav-logo">
-
           <h1>
             EVENT <span>MANAGER</span>
           </h1>
-
         </div>
 
         {/* RIGHT NAVIGATION */}
-
         <div className="nav-links">
-
-          <button
-            onClick={() => setView("all")}
-          >
+          <button onClick={() => setView("all")}>
             ALL EVENTS
           </button>
 
-          <button
-            onClick={() => setView("created")}
-          >
+          <button onClick={() => setView("created")}>
             MY EVENTS
           </button>
 
-          <button
-            onClick={() => setView("registered")}
-          >
+          <button onClick={() => setView("registered")}>
             REGISTERED
           </button>
 
@@ -130,105 +103,69 @@ function CheckEventInterface({ userEmail, goback }) {
             DASHBOARD
           </button>
 
-          <button
-            onClick={() =>
-              window.location.reload()
-            }
-          >
+          <button onClick={() => window.location.reload()}>
             LOGOUT
           </button>
-
         </div>
-
       </div>
       
-
       {/* EVENT LIST */}
-
       <div className="event-list">
-
         {events.length === 0 ? (
-
           <p>No events found.</p>
-
         ) : (
-
           events.map((event, index) => (
-
             <div
               key={event._id || index}
               className="event-card"
-
               onClick={(e) => {
-
                 e.stopPropagation();
-
                 setOpenCard(
                   openCard === event._id
                     ? null
                     : event._id
                 );
-
               }}
             >
-
               {/* IMAGE */}
-
               {event.poster && (
-
                 <img
                   src={event.poster}
                   alt={event.title}
                 />
-
               )}
 
               {/* TITLE */}
-
               <h3>{event.title}</h3>
 
               {/* SHORT DESCRIPTION */}
-
               <p className="short-desc">
-
                 {event.description?.slice(0, 80)}...
-
               </p>
 
               {/* OPEN ONLY CLICKED CARD */}
-
               {openCard === event._id && (
-
                 <div className="extra-info" onClick={(e) => e.stopPropagation()}>
-
                   <p>
                     <b>Description:</b> {event.description}
                   </p>
-
                   <p>
                     <b>Location:</b> {event.location}
                   </p>
-
                   <p>
                     <b>Organizer:</b> {event.email}
                   </p>
-
                   <p>
                     <b>Start:</b>{" "}
                     {new Date(event.startDate).toLocaleString()}
                   </p>
-
                   <p>
                     <b>End:</b>{" "}
                     {new Date(event.endDate).toLocaleString()}
                   </p>
 
                   {/* REGISTER BUTTON */}
-
-                  <div
-                    onClick={(e) => e.stopPropagation()}
-                  >
-
+                  <div onClick={(e) => e.stopPropagation()}>
                     <button
                       className="register-btn"
                       onClick={() => handleRegister(event._id)}
@@ -236,27 +173,17 @@ function CheckEventInterface({ userEmail, goback }) {
                         event.registeredUsers?.includes(userEmail)
                       }
                     >
-
                       {event.registeredUsers?.includes(userEmail)
                         ? "Registered"
                         : "Register"}
-
                     </button>
-
                   </div>
-
                 </div>
-
               )}
-
             </div>
-
           ))
-
         )}
-
       </div>
-
     </div>
   );
 }
